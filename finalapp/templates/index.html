@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Career Guidance Questionnaire</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  {% load static %} {# Make sure to load static if placing CSS externally #}
+   <style>
+    /* Modern Design System Variables */
+:root {
+  --primary-color: #4361ee;
+  --primary-hover: #3a56d4;
+  --secondary-color: #f72585;
+  --success-color: #43aa8b;
+  --text-dark: #2b2d42;
+  --text-muted: #6c757d;
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+  --border-radius: 12px;
+  --section-spacing: 3rem;
+}
+
+body {
+  background-color: var(--bg-light);
+  font-family: 'Inter', sans-serif;
+  padding: 2rem 0;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Sleek Card Design */
+.questionnaire-card {
+  background-color: var(--bg-white);
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 3rem;
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+/* Elegant Typography */
+.questionnaire-card h2 {
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.questionnaire-card h2::before {
+  content: "✨ ";
+}
+
+.questionnaire-card h2::after {
+  content: " ✨";
+}
+
+.questionnaire-card h3 {
+  color: var(--text-dark);
+  margin-top: var(--section-spacing);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.questionnaire-card h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 60px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 3px;
+}
+
+.questionnaire-card h3 b::before {
+  content: "🔍 ";
+}
+
+.questionnaire-card h4 {
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+}
+
+.questionnaire-card h5 {
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.8rem;
+  transition: var(--transition);
+}
+
+/* Modern Rating Scales */
+.rating-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: var(--transition);
+}
+
+.rating-group:hover {
+  transform: translateX(5px);
+  border-bottom-color: var(--primary-color);
+}
+
+.rating-label {
+  flex-basis: 40%;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+/* Emoji indicators for different skill types */
+.rating-label[for*="db_rating"]::before,
+.rating-label[for*="comp_arch_rating"]::before,
+.rating-label[for*="dist_comp_rating"]::before {
+  content: "💾 ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="cybersecurity"]::before,
+.rating-label[for*="networking"]::before,
+.rating-label[for*="computer_forensics"]::before {
+  content: "🔒 ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="development"]::before,
+.rating-label[for*="programmingskills"]::before,
+.rating-label[for*="software_eng"]::before {
+  content: "💻 ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="project_management"]::before,
+.rating-label[for*="business_analysis"]::before {
+  content: "📊 ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="communication"]::before,
+.rating-label[for*="technical_communication"]::before {
+  content: "🗣️ ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="ai_ml"]::before,
+.rating-label[for*="data_science"]::before {
+  content: "🤖 ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="troubleshooting"]::before {
+  content: "🔧 ";
+  margin-right: 6px;
+}
+
+.rating-label[for*="graphics"]::before {
+  content: "🎨 ";
+  margin-right: 6px;
+}
+
+.switch-field {
+  display: flex;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(0,0,0,0.08);
+  flex-grow: 1;
+  max-width: 350px;
+  background-color: rgba(0,0,0,0.02);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  background-color: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1;
+  text-align: center;
+  padding: 10px 12px;
+  margin: 0;
+  transition: var(--transition);
+  flex-grow: 1;
+  border-right: none;
+  position: relative;
+  z-index: 1;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.switch-field input:checked + label {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 5px rgba(67, 97, 238, 0.3);
+  font-weight: 500;
+}
+
+/* Animated label effect */
+.switch-field input:checked + label::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary-color), #6610f2);
+  z-index: -1;
+  border-radius: 30px;
+  animation: pulseEffect 1.5s infinite alternate;
+}
+
+@keyframes pulseEffect {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Emoji Rating Scale for Personality Questions */
+.personality-question {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.personality-question:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.question-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2b2d42;
+  margin-bottom: 1.5rem;
+}
+
+.emoji-rating-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1rem 0 0.5rem;
+}
+
+.emoji-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 14%; /* 7 options */
+  text-align: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.emoji-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Custom radio button styling */
+.emoji-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.emoji-option input[type="radio"] + label {
+  cursor: pointer;
+}
+
+.emoji-option input[type="radio"]:checked + label .emoji {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.emoji-option input[type="radio"]:checked + label .emoji-label {
+  color: #4361ee;
+  font-weight: 600;
+}
+
+.emoji-option input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #4361ee;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.emoji-option input[type="radio"]:focus + label .emoji {
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+  border-radius: 50%;
+}
+
+/* Progress indicator */
+.question-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.question-counter {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2b2d42;
+}
+
+.progress-percentage {
+  background-color: #e7ecff;
+  color: #4361ee;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+/* Animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(67, 97, 238, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+  }
+}
+
+/* Add HTML structure to use with this CSS */
+
+/* Improved Personality Questions */
+.personality-question {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: var(--transition);
+}
+
+.personality-question:hover {
+  border-bottom-color: var(--secondary-color);
+  background-color: rgba(247, 37, 133, 0.02);
+  border-radius: 8px;
+  padding-left: 10px;
+}
+
+.personality-question .form-check {
+  margin-bottom: 0.75rem;
+  padding-left: 2rem;
+}
+
+.personality-question .form-check-input {
+  margin-left: -2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.25rem;
+  background-color: #fff;
+  border: 2px solid rgba(0,0,0,0.2);
+  transition: var(--transition);
+}
+
+.personality-question .form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(67, 97, 238, 0.25);
+}
+
+.personality-question .form-check-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(67, 97, 238, 0.25);
+}
+
+.personality-question .form-check-label {
+  font-size: 1rem;
+  color: var(--text-dark);
+  padding-top: 0.1rem;
+  transition: var(--transition);
+}
+
+.personality-question .form-check:hover .form-check-label {
+  color: var(--primary-color);
+}
+
+/* Grouped personality traits with icons */
+.personality-question[data-trait="extraversion"] h5::before,
+[name^="ext"] ~ .form-check-label::before {
+  content: "🗣️ ";
+  opacity: 0.7;
+}
+
+.personality-question[data-trait="emotional-stability"] h5::before,
+[name^="est"] ~ .form-check-label::before {
+  content: "😌 ";
+  opacity: 0.7;
+}
+
+.personality-question[data-trait="agreeableness"] h5::before,
+[name^="agr"] ~ .form-check-label::before {
+  content: "🤝 ";
+  opacity: 0.7;
+}
+
+.personality-question[data-trait="conscientiousness"] h5::before,
+[name^="csn"] ~ .form-check-label::before {
+  content: "✅ ";
+  opacity: 0.7;
+}
+
+.personality-question[data-trait="openness"] h5::before,
+[name^="opn"] ~ .form-check-label::before {
+  content: "🌟 ";
+  opacity: 0.7;
+}
+
+.personality-question[data-trait="self-enhancement"] h5::before,
+[name^="set"] ~ .form-check-label::before {
+  content: "📈 ";
+  opacity: 0.7;
+}
+
+/* Eye-catching submit button */
+.submit-button {
+  padding: 0.85rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary-color), #6610f2);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6610f2, var(--primary-color));
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.submit-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.submit-button:hover::before {
+  opacity: 1;
+}
+
+.submit-button::after {
+  content: " 🚀";
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .questionnaire-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .rating-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .rating-label {
+    flex-basis: 100%;
+    margin-bottom: 0.75rem;
+  }
+  
+  .switch-field {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* Subtle loading animation for the form */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Progress indicator */
+.progress-wrapper {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+  padding: 1rem 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.progress {
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+/* Emoji Rating Scale for Personality Questions */
+.personality-question {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border-bottom: none; /* Override previous border-bottom */
+}
+
+.personality-question:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #2b2d42;
+  margin-bottom: 1.5rem;
+}
+
+.emoji-rating-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1rem 0 0.5rem;
+}
+
+.emoji-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 14%; /* Approximately 7 options */
+  text-align: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.emoji-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Hide the original radio buttons */
+.emoji-option .form-check-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Style for selected option */
+.emoji-option .form-check-input:checked + label .emoji {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.emoji-option .form-check-input:checked + label .emoji-label {
+  color: #4361ee;
+  font-weight: 600;
+}
+
+.emoji-option .form-check-input:checked + label::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #4361ee;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+/* Progress indicator */
+.question-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.question-counter {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2b2d42;
+}
+
+.progress-percentage {
+  background-color: #e7ecff;
+  color: #4361ee;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+/* Animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(67, 97, 238, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .emoji-rating-scale {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .emoji-option {
+    width: 20%;
+    margin-bottom: 1rem;
+  }
+  
+  .emoji {
+    font-size: 1.75rem;
+  }
+  
+  .emoji-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 576px) {
+  .emoji-option {
+    width: 30%;
+  }
+  
+  .question-progress {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-9">
+      <div class="questionnaire-card">
+        <h2 class="text-center mb-3"><b>QUESTIONNAIRE</b></h2>
+        <h4 class="text-center text-muted mb-5">(Please fill the given questionnaire)</h4>
+
+        <form action="{% url 'predict' %}" method="post">
+          {% csrf_token %}
+
+          <h3 class="mb-4"><b>Part 1: Technical Skills</b></h3>
+          <h5 class="text-muted mb-4">Rate your skills on a scale of 1 (Poor) to 7 (Excellent).</h5>
+
+          {# Include the rating scale component, passing variables #}
+          {% include "_rating_scale.html" with label="Database Fundamentals" name_attr="db_rating" %}
+          {% include "_rating_scale.html" with label="Computer Architecture" name_attr="comp_arch_rating" %}
+          {% include "_rating_scale.html" with label="Distributed Computing Systems" name_attr="dist_comp_rating" %}
+          {% include "_rating_scale.html" with label="Cyber Security" name_attr="cybersecurity" %}
+          {% include "_rating_scale.html" with label="Networking" name_attr="networking" %}
+          {% include "_rating_scale.html" with label="Development" name_attr="development" %}
+          {% include "_rating_scale.html" with label="Programming Skills" name_attr="programmingskills" %}
+          {% include "_rating_scale.html" with label="Project Management" name_attr="project_management_rating" %}
+          {% include "_rating_scale.html" with label="Computer Forensics Fundamental" name_attr="computer_forensics_fundamental_rating" %}
+          {% include "_rating_scale.html" with label="Technical Communication" name_attr="technical_communication_rating" %}
+          {% include "_rating_scale.html" with label="AI ML" name_attr="ai_ml_rating" %}
+          {% include "_rating_scale.html" with label="Software Engineering" name_attr="software_eng_rating" %}
+          {% include "_rating_scale.html" with label="Business Analysis" name_attr="business_analysis_rating" %}
+          {% include "_rating_scale.html" with label="Communication skills" name_attr="communication_skills_rating" %}
+          {% include "_rating_scale.html" with label="Data Science" name_attr="data_science_rating" %}
+          {% include "_rating_scale.html" with label="Troubleshooting skills" name_attr="troubleshooting-rating" %}
+          {% include "_rating_scale.html" with label="Graphics Designing" name_attr="graphics-designing-rating" %}
+
+
+          <h3 class="mt-5 mb-4"><b>Part 2: Personality Traits</b></h3>
+          <h5 class="text-muted mb-4">To what extent do you agree with the following statements?</h5>
+
+          {# Include the personality question component, passing variables #}
+          {% include "_personality_question.html" with question_text="I am the life of the party." name_attr="ext1" %}
+          {% include "_personality_question.html" with question_text="I don't talk a lot." name_attr="ext2" %}
+          {% include "_personality_question.html" with question_text="I feel comfortable around people." name_attr="ext3" %}
+          {% include "_personality_question.html" with question_text="I am quiet around strangers." name_attr="ext4" %}
+          {% include "_personality_question.html" with question_text="I get stressed out easily." name_attr="est1" %}
+          {% include "_personality_question.html" with question_text="I get irritated easily." name_attr="est2" %}
+          {% include "_personality_question.html" with question_text="I worry about things." name_attr="est3" %}
+          {% include "_personality_question.html" with question_text="I change my mood a lot." name_attr="est4" %}
+          {% include "_personality_question.html" with question_text="I have a soft heart." name_attr="agr1" %}
+          {% include "_personality_question.html" with question_text="I am interested in people." name_attr="agr2" %}
+          {% include "_personality_question.html" with question_text="I insult people." name_attr="agr3" %}
+          {% include "_personality_question.html" with question_text="I am not really interested in others." name_attr="agr4" %}
+          {% include "_personality_question.html" with question_text="I am always prepared." name_attr="csn1" %}
+          {% include "_personality_question.html" with question_text="I leave my belongings around." name_attr="csn2" %}
+          {% include "_personality_question.html" with question_text="I follow a schedule." name_attr="csn3" %}
+          {% include "_personality_question.html" with question_text="I make a mess of things." name_attr="csn4" %}
+          {% include "_personality_question.html" with question_text="I have a rich vocabulary." name_attr="opn1" %}
+          {% include "_personality_question.html" with question_text="I have difficulty understanding abstract ideas." name_attr="opn2" %}
+          {% include "_personality_question.html" with question_text="I do not have a good imagination." name_attr="opn3" %}
+          {% include "_personality_question.html" with question_text="I use difficult words." name_attr="opn4" %}
+          {% include "_personality_question.html" with question_text="I am afraid of change." name_attr="otc" %}
+          {% include "_personality_question.html" with question_text="I put worldly pleasures before productivity." name_attr="hed" %}
+          {% include "_personality_question.html" with question_text="I feel connected to all living beings, including plants and animals." name_attr="ste1" %}
+          {% include "_personality_question.html" with question_text="I see a connection between who I am at all places and times." name_attr="ste2" %}
+          {% include "_personality_question.html" with question_text="I experience my self as more than my thoughts and feelings." name_attr="ste3" %}
+          {% include "_personality_question.html" with question_text="I am able to step back from my emotions and observe them from a separate point of view." name_attr="ste4" %}
+          {% include "_personality_question.html" with question_text="I am capable of holding meaningful or respectful conversations." name_attr="con" %}
+          {% include "_personality_question.html" with question_text="I have control over my emotions." name_attr="emo" %}
+          {% include "_personality_question.html" with question_text="I am self-motivated and driven to continually improve myself." name_attr="set1" %}
+          {% include "_personality_question.html" with question_text="I am willing to step outside of my comfort zone in order to challenge myself and grow." name_attr="set2" %}
+          {% include "_personality_question.html" with question_text="I am open to constructive criticism and use it to improve myself." name_attr="set3" %}
+          {# Make the last one look slightly different if needed, e.g., remove border #}
+
+          
+          <div style="border-bottom: none; margin-bottom: 2.5rem;">
+             {% include "_personality_question.html" with question_text="I am proactive in seeking out opportunities for self-enhancement." name_attr="set4" %}
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary submit-button">Submit Answers</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<footer>
+  <script> window.chtlConfig = { chatbotId: "8824311992" } </script>
+  <script async data-id="8824311992" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+</footer>
+</body>
+</html>

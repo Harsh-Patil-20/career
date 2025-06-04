@@ -1,0 +1,21 @@
+{# Template for a 1-7 rating scale #}
+{# Expects 'label' and 'name_attr' variables #}
+<div class="rating-group">
+    <span class="rating-label">{{ label }}</span>
+    <div class="switch-field">
+        <input type="radio" id="{{ name_attr }}_1" name="{{ name_attr }}" value="1" {% if forloop.first %}checked{% endif %}>
+        <label for="{{ name_attr }}_1">1</label>
+        <input type="radio" id="{{ name_attr }}_2" name="{{ name_attr }}" value="2">
+        <label for="{{ name_attr }}_2">2</label>
+        <input type="radio" id="{{ name_attr }}_3" name="{{ name_attr }}" value="3">
+        <label for="{{ name_attr }}_3">3</label>
+        <input type="radio" id="{{ name_attr }}_4" name="{{ name_attr }}" value="4">
+        <label for="{{ name_attr }}_4">4</label>
+        <input type="radio" id="{{ name_attr }}_5" name="{{ name_attr }}" value="5">
+        <label for="{{ name_attr }}_5">5</label>
+        <input type="radio" id="{{ name_attr }}_6" name="{{ name_attr }}" value="6">
+        <label for="{{ name_attr }}_6">6</label>
+        <input type="radio" id="{{ name_attr }}_7" name="{{ name_attr }}" value="7">
+        <label for="{{ name_attr }}_7">7</label>
+    </div>
+</div>

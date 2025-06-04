@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Career Guidance - Welcome</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  {% load static %} {# Load static if you plan to use static files like images/css #}
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      /* Optional: Use a background image */
+      /* background-image: url("{% static 'finalapp/images/your_background_image.jpg' %}"); */
+      /* Example using the uploaded image if placed in static files */
+      /* background-image: url("{% static 'finalapp/images/image_15e758.jpg' %}"); */
+      background-color: #eef2f7; /* Soft background color */
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex; /* Use flexbox for centering */
+      align-items: center; /* Vertical centering */
+      justify-content: center; /* Horizontal centering */
+      padding: 2rem;
+    }
+
+    .welcome-card {
+      background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      max-width: 650px;
+      width: 100%;
+    }
+
+    .welcome-card h1 {
+      color: #343a40;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .welcome-card p {
+      color: #495057;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-start {
+      padding: 0.8rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-radius: 50px; /* Pill shape */
+      transition: all 0.3s ease;
+    }
+
+    .btn-start:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="welcome-card">
+  <h1>Find Your Ideal Tech Career Path</h1>
+  <p>
+    Confused about which tech role suits you best? Answer a few questions about your technical skills and personality traits, and let our AI guide you towards the most suitable career options like AI/ML Specialist, Software Developer, Cyber Security Expert, and more!
+  </p>
+  {# This button links to the URL named 'questionnaire_form' which we will define in urls.py #}
+  <a href="{% url 'questionnaire_form' %}" class="btn btn-primary btn-lg btn-start">
+    Start Questionnaire
+</a>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{# If you want the chatbot on the homepage too, add its scripts here #}
+{# <footer> ... chatling scripts ... </footer> #}
+
+</body>
+</html>

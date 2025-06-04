@@ -1,0 +1,63 @@
+{# Template for a personality trait question with emoji scale #}
+{# Expects 'question_text' and 'name_attr' variables #}
+<div class="personality-question">
+  <div class="question-text">{{ question_text }}</div>
+  
+  <div class="emoji-rating-scale">
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_sd" value="Strongly Disagree" checked>
+      <label for="{{ name_attr }}_sd">
+        <div class="emoji">😠</div>
+        <div class="emoji-label">Strongly Disagree</div>
+      </label>
+    </div>
+    
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_d" value="Disagree">
+      <label for="{{ name_attr }}_d">
+        <div class="emoji">🙁</div>
+        <div class="emoji-label">Disagree</div>
+      </label>
+    </div>
+    
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_sld" value="Slightly Disagree">
+      <label for="{{ name_attr }}_sld">
+        <div class="emoji">😕</div>
+        <div class="emoji-label">Slightly Disagree</div>
+      </label>
+    </div>
+    
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_n" value="Neutral">
+      <label for="{{ name_attr }}_n">
+        <div class="emoji">😐</div>
+        <div class="emoji-label">Neutral</div>
+      </label>
+    </div>
+    
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_sla" value="Slightly Agree">
+      <label for="{{ name_attr }}_sla">
+        <div class="emoji">🙂</div>
+        <div class="emoji-label">Slightly Agree</div>
+      </label>
+    </div>
+    
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_a" value="Agree">
+      <label for="{{ name_attr }}_a">
+        <div class="emoji">😊</div>
+        <div class="emoji-label">Agree</div>
+      </label>
+    </div>
+    
+    <div class="emoji-option">
+      <input class="form-check-input" type="radio" name="{{ name_attr }}" id="{{ name_attr }}_sa" value="Strongly Agree">
+      <label for="{{ name_attr }}_sa">
+        <div class="emoji">😄</div>
+        <div class="emoji-label">Strongly Agree</div>
+      </label>
+    </div>
+  </div>
+</div>
