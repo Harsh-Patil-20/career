@@ -3,19 +3,25 @@
 <div class="rating-group">
     <span class="rating-label">{{ label }}</span>
     <div class="switch-field">
-        <input type="radio" id="{{ name_attr }}_1" name="{{ name_attr }}" value="1" {% if forloop.first %}checked{% endif %}>
+        <input type="radio" id="{{ name_attr }}_1" name="{{ name_attr }}" value="1" required {% if forloop.first %}checked{% endif %}>
         <label for="{{ name_attr }}_1">1</label>
-        <input type="radio" id="{{ name_attr }}_2" name="{{ name_attr }}" value="2">
+
+        <input type="radio" id="{{ name_attr }}_2" name="{{ name_attr }}" value="2" required>
         <label for="{{ name_attr }}_2">2</label>
-        <input type="radio" id="{{ name_attr }}_3" name="{{ name_attr }}" value="3">
+
+        <input type="radio" id="{{ name_attr }}_3" name="{{ name_attr }}" value="3" required>
         <label for="{{ name_attr }}_3">3</label>
-        <input type="radio" id="{{ name_attr }}_4" name="{{ name_attr }}" value="4">
+
+        <input type="radio" id="{{ name_attr }}_4" name="{{ name_attr }}" value="4" required>
         <label for="{{ name_attr }}_4">4</label>
-        <input type="radio" id="{{ name_attr }}_5" name="{{ name_attr }}" value="5">
+
+        <input type="radio" id="{{ name_attr }}_5" name="{{ name_attr }}" value="5" required>
         <label for="{{ name_attr }}_5">5</label>
-        <input type="radio" id="{{ name_attr }}_6" name="{{ name_attr }}" value="6">
+
+        <input type="radio" id="{{ name_attr }}_6" name="{{ name_attr }}" value="6" required>
         <label for="{{ name_attr }}_6">6</label>
-        <input type="radio" id="{{ name_attr }}_7" name="{{ name_attr }}" value="7">
+
+        <input type="radio" id="{{ name_attr }}_7" name="{{ name_attr }}" value="7" required>
         <label for="{{ name_attr }}_7">7</label>
     </div>
 </div>
